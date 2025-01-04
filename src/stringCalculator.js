@@ -8,9 +8,13 @@ function add(numbers) {
     numbers = parts[1]; // Remaining part is the numbers string.
 
     if (delimiterPart.startsWith("[")) {
-      // Handle multi-character delimiters.
-      const customDelimiter = delimiterPart.slice(1, -1); // Extract between `[` and `]`.
-      delimiter = new RegExp(escapeRegex(customDelimiter));
+      // Handle multiple delimiters.
+      const delimiterPattern = delimiterPart
+        .match(/\[([^\]]+)\]/g) // Match all `[delimiter]` parts.
+        .map((d) => d.slice(1, -1)) // Remove square brackets.
+        .map((d) => escapeRegex(d)) // Escape special regex characters.
+        .join("|"); // Join delimiters with `|` for regex alternation.
+      delimiter = new RegExp(delimiterPattern);
     } else {
       // Single-character delimiter.
       delimiter = new RegExp(escapeRegex(delimiterPart));
