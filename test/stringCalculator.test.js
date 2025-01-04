@@ -8,3 +8,7 @@ test("returns number for a single element in the string", () => {
   expect(add("1")).toBe(1);
   expect(add("2")).toBe(2);
 });
+
+test("comma separated numbers should return their sum", () => {
+  expect(add("1,3")).toBe(4);
+});
