@@ -27,3 +27,8 @@ test("support custom delimiter with a pattern", () => {
   expect(add("//;\n1;2")).toBe(3);
   expect(add("//?\n1?2?3")).toBe(6);
 });
+
+test("negative numbers should throw exception with details", () => {
+  expect(() => add("-1,2,3")).toThrow("Negative numbers not allowed: -1");
+  expect(() => add("1,-2,-3")).toThrow("Negative numbers not allowed: -2,-3");
+});
