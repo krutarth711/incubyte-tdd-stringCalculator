@@ -8,8 +8,10 @@ function add(numbers) {
     numbers = parts[1];
   }
 
-  const numbersArr = numbers.split(delimiter);
-  const negatives = numbersArr.filter(num => num < 0);
+  const numbersArr = numbers
+    .split(delimiter)
+    .filter((num) => parseInt(num, 10) <= 1000);
+  const negatives = numbersArr.filter((num) => num < 0);
   if (negatives.length) {
     throw new Error(`Negative numbers not allowed: ${negatives.join(",")}`);
   }
