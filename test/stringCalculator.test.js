@@ -20,5 +20,5 @@ test("any number of comma separated numbers should return their sum", () => {
 });
 
 test("new line instead of comma between numbers", () => {
-  expect(add("1\n2,3")).toBe(6);
+  expect(add("1\n2,3\n,4")).toBe(10);
 });
