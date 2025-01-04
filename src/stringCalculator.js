@@ -4,8 +4,17 @@ function add(numbers) {
   let delimiter = /[\n,]/;
   if (numbers.startsWith("//")) {
     const parts = numbers.split("\n");
-    delimiter = new RegExp(`[${parts[0].slice(2)}]`); // take part before \n, and remove "//" to get delimiter
-    numbers = parts[1];
+    const delimiterPart = parts[0].slice(2); // Extract custom delimiter definition.
+    numbers = parts[1]; // Remaining part is the numbers string.
+
+    if (delimiterPart.startsWith("[")) {
+      // Handle multi-character delimiters.
+      const customDelimiter = delimiterPart.slice(1, -1); // Extract between `[` and `]`.
+      delimiter = new RegExp(escapeRegex(customDelimiter));
+    } else {
+      // Single-character delimiter.
+      delimiter = new RegExp(escapeRegex(delimiterPart));
+    }
   }
 
   const numbersArr = numbers
@@ -17,5 +26,10 @@ function add(numbers) {
   }
   const sum = numbersArr.reduce((total, num) => total + parseInt(num, 10), 0);
   return sum;
+}
+
+// Utility function to escape special regex characters.
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 module.exports = add;
