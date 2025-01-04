@@ -22,3 +22,8 @@ test("any number of comma separated numbers should return their sum", () => {
 test("new line instead of comma between numbers", () => {
   expect(add("1\n2,3\n,4")).toBe(10);
 });
+
+test("support custom delimiter with a pattern", () => {
+  expect(add("//;\n1;2")).toBe(3);
+  expect(add("//?\n1?2?3")).toBe(6);
+});
