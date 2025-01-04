@@ -13,3 +13,8 @@ test("two comma separated numbers should return their sum", () => {
   expect(add("1,3")).toBe(4);
   expect(add("1,5")).toBe(6);
 });
+
+test("any number of comma separated numbers should return their sum", () => {
+  expect(add("1,2,3,4,5")).toBe(15);
+  expect(add("13,12,1")).toBe(26);
+});
