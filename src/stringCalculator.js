@@ -9,6 +9,10 @@ function add(numbers) {
   }
 
   const numbersArr = numbers.split(delimiter);
+  const negatives = numbersArr.filter(num => num < 0);
+  if (negatives.length) {
+    throw new Error(`Negative numbers not allowed: ${negatives.join(",")}`);
+  }
   const sum = numbersArr.reduce((total, num) => total + parseInt(num, 10), 0);
   return sum;
 }
