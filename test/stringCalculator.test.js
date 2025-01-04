@@ -6,4 +6,5 @@ test("returns 0 for an empty string", () => {
 
 test("returns number for a single element in the string", () => {
   expect(add("1")).toBe(1);
+  expect(add("2")).toBe(2);
 });
