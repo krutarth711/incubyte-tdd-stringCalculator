@@ -53,3 +53,7 @@ test("handles multiple single-character delimiters", () => {
 test("handles multiple delimiters with varying lengths", () => {
   expect(add("//[***][%%%]\n1***2%%%3")).toBe(6);
 });
+
+test("Should calculate between provided start and end numbers only", () => {
+  expect(add("1,2,3,4,5,8,10", 2, 9)).toBe(22);
+});

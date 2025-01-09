@@ -1,4 +1,4 @@
-function add(numbers) {
+function add(numbers, start = null, end = null) {
   if (numbers === "") return 0;
 
   let delimiter = /[\n,]/;
@@ -24,16 +24,17 @@ function add(numbers) {
   }
 
   const numbersArr = numbers
-    .split(delimiter)
-    .filter((num) => parseInt(num) <= 1000);
+    .split(delimiter).map(Number)
+    .filter((num) => num <= 1000)
+    .filter((num) => start ? (num >= start && num <= end) : num);
   const negatives = numbersArr.filter((num) => num < 0);
   if (negatives.length) {
     throw new Error(`Negative numbers not allowed: ${negatives.join(",")}`);
   }
   if (isMultiply) {
-    return numbersArr.reduce((total, num) => total * parseInt(num), 1);
+    return numbersArr.reduce((total, num) => total * num, 1);
   } else {
-    return numbersArr.reduce((total, num) => total + parseInt(num), 0);
+    return numbersArr.reduce((total, num) => total + num, 0);
   }
 }
 
